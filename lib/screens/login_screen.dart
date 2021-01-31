@@ -5,7 +5,7 @@ import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:stargazer_mobile_app/models/login_user_model.dart';
 import 'package:stargazer_mobile_app/models/registration_user_model.dart';
-import 'package:stargazer_mobile_app/screens/main_screen.dart';
+import 'package:stargazer_mobile_app/main.dart';
 import 'package:stargazer_mobile_app/screens/registration_screen.dart';
 import 'package:stargazer_mobile_app/services/api_instance.dart';
 import 'package:stargazer_mobile_app/services/api_services.dart';

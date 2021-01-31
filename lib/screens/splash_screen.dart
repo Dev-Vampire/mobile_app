@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:splashscreen/splashscreen.dart';
-import 'package:stargazer_mobile_app/screens/main_screen.dart';
+import 'package:stargazer_mobile_app/main.dart';
 import 'package:stargazer_mobile_app/screens/registration_screen.dart';
 import 'package:stargazer_mobile_app/screens/route_screen.dart';
 
