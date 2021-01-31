@@ -37,37 +37,49 @@ class _LifeLongHoroscopeState extends State<LifeLongHoroscope> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Life Long Horoscope'),
+        title: Text('LifeTime Horoscope'),
       ),
       body: SafeArea(
         child: SingleChildScrollView(
           child: FutureBuilder<Object>(
               future: getImageName(),
               builder: (context, snapshot) {
-                return Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Image.asset(
-                      'images/${snapshot.data}.png',
-                      width: 200,
-                      height: 200,
-                    ),
-                    FutureBuilder<Object>(
-                        future: getHoroscopeData(),
-                        builder: (context, snapshot) {
-                          return Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: AutoSizeText(
-                              snapshot.data,
-                              maxLines: 300,
-                              maxFontSize: 20,
-                              style: TextStyle(color: Colors.black),
-                            ),
-                          );
-                        })
-                  ],
-                );
+                if (!snapshot.hasData) {
+                  return CircularProgressIndicator(
+                    backgroundColor: Colors.blue,
+                  );
+                } else {
+                  return Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Image.asset(
+                        'images/${snapshot.data}.png',
+                        width: 200,
+                        height: 200,
+                      ),
+                      FutureBuilder<Object>(
+                          future: getHoroscopeData(),
+                          builder: (context, snapshot) {
+                            if (!snapshot.hasData) {
+                              return CircularProgressIndicator(
+                                backgroundColor: Colors.blue,
+                              );
+                            } else {
+                              return Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: AutoSizeText(
+                                  snapshot.data,
+                                  maxLines: 300,
+                                  maxFontSize: 20,
+                                  style: TextStyle(color: Colors.black),
+                                ),
+                              );
+                            }
+                          })
+                    ],
+                  );
+                }
               }),
         ),
       ),

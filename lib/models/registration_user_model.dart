@@ -6,6 +6,7 @@ class RegistrationUser {
   int birthDate;
   int birthHour;
   int birthMinute;
+  String sign;
 
   RegistrationUser(
       {this.name,
@@ -14,6 +15,7 @@ class RegistrationUser {
       this.birthMonth,
       this.birthDate,
       this.birthHour,
+      this.sign,
       this.birthMinute});
 
   RegistrationUser.fromJson(Map<String, dynamic> json) {
@@ -24,6 +26,7 @@ class RegistrationUser {
     birthDate = json['birthDate'];
     birthHour = json['birthHour'];
     birthMinute = json['birthMinute'];
+    sign = json['sign'];
   }
 
   Map<String, dynamic> toJson() {

@@ -15,6 +15,9 @@ class Register extends StatefulWidget {
 }
 
 class _RegisterState extends State<Register> {
+
+
+
   final _formKey = GlobalKey<FormState>();
 
   String phoneNo;
@@ -87,6 +90,7 @@ class _RegisterState extends State<Register> {
             if (sign.length > 0) {
               SharedPreferences prefs = await SharedPreferences.getInstance();
               prefs.setString("sign", sign);
+              prefs.setBool('login', true);
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => MyApp()),
@@ -162,7 +166,7 @@ class _RegisterState extends State<Register> {
             textAlign: TextAlign.center,
           ),
           SizedBox(
-            height: 60,
+            height: 40,
           ),
 
           //Username
@@ -182,7 +186,7 @@ class _RegisterState extends State<Register> {
               ],
             ),
           ),
-          Container(
+        Container(
             margin: EdgeInsets.only(top: 5),
             padding: EdgeInsets.symmetric(horizontal: 10),
             decoration: BoxDecoration(
@@ -193,8 +197,9 @@ class _RegisterState extends State<Register> {
               ),
             ),
             child: TextFormField(
+           
               controller: usernameController,
-              focusNode: usernameFN,
+              keyboardType: TextInputType.number,
               validator: (value) {
                 if (value.isEmpty) {
                   return "Enter Username";
@@ -202,15 +207,13 @@ class _RegisterState extends State<Register> {
                   return null;
                 }
               },
-              autofocus: true,
+              focusNode: usernameFN,
               onEditingComplete: () => FocusScope.of(context).nextFocus(),
               inputFormatters: [
-                LengthLimitingTextInputFormatter(30),
+                LengthLimitingTextInputFormatter(11),
               ],
-              decoration:
-                  InputDecoration.collapsed(hintText: 'eg.Mister Ramda'),
               onChanged: (value) {
-                username = value;
+                phoneNo = value;
               },
             ),
           ),
@@ -243,6 +246,7 @@ class _RegisterState extends State<Register> {
               ),
             ),
             child: TextFormField(
+                 obscureText: true,
               controller: passwordController,
               keyboardType: TextInputType.number,
               validator: (value) {

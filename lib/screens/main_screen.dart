@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:splashscreen/splashscreen.dart';
+import 'package:stargazer_mobile_app/models/daily_horoscope.dart';
+import 'package:stargazer_mobile_app/screens/daily_horoscope_screen.dart';
 import 'package:stargazer_mobile_app/screens/life_long_horoscope_screen.dart';
 import 'package:stargazer_mobile_app/screens/splash_screen.dart';
 
@@ -59,6 +63,24 @@ class _MyHomePageState extends State<MyHomePage> {
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.black,
+        actions: [
+          IconButton(
+            color: Colors.white,
+            icon: Icon(Icons.logout),
+            onPressed: () async {
+              var prefs = await SharedPreferences.getInstance();
+              prefs.remove('login');
+              prefs.remove('sign');
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (context) => AppSplashScreen()),
+              );
+            },
+          )
+        ],
+      ),
       body: SafeArea(
         child: Container(
           decoration: BoxDecoration(
@@ -77,29 +99,38 @@ class _MyHomePageState extends State<MyHomePage> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    Container(
-                      width: 150,
-                      height: 200,
-                      child: Card(
-                        color: Colors.black,
-                        shadowColor: Colors.blue,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Image.asset(
-                              'images/daily.png',
-                              width: 80,
-                              height: 80,
-                            ),
-                            SizedBox(
-                              height: 20,
-                            ),
-                            Text(
-                              'Daily Horoscope',
-                              style: TextStyle(color: Colors.white),
-                            )
-                          ],
+                    InkWell(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => DailyHoroscopeScreen()),
+                        );
+                      },
+                      child: Container(
+                        width: 150,
+                        height: 200,
+                        child: Card(
+                          color: Colors.white,
+                          shadowColor: Colors.blue,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Image.asset(
+                                'images/daily.png',
+                                width: 80,
+                                height: 80,
+                              ),
+                              SizedBox(
+                                height: 20,
+                              ),
+                              Text(
+                                'Daily Horoscope',
+                                style: TextStyle(color: Colors.black),
+                              )
+                            ],
+                          ),
                         ),
                       ),
                     ),
@@ -115,7 +146,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         width: 150,
                         height: 200,
                         child: Card(
-                          color: Colors.black,
+                          color: Colors.white,
                           shadowColor: Colors.blue,
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
@@ -131,7 +162,7 @@ class _MyHomePageState extends State<MyHomePage> {
                               ),
                               Text(
                                 'LifeTime Horoscope',
-                                style: TextStyle(color: Colors.white),
+                                style: TextStyle(color: Colors.black),
                               )
                             ],
                           ),
