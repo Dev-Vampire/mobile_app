@@ -15,9 +15,6 @@ class Register extends StatefulWidget {
 }
 
 class _RegisterState extends State<Register> {
-
-
-
   final _formKey = GlobalKey<FormState>();
 
   String phoneNo;
@@ -114,8 +111,14 @@ class _RegisterState extends State<Register> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.white,
-        body: SafeArea(child: buildRegister(context)));
+        // backgroundColor: Colors.white,
+        body: Container(
+            decoration: BoxDecoration(
+                image: DecorationImage(
+              image: AssetImage('images/astrology_bg.jpg'),
+              fit: BoxFit.fill,
+            )),
+            child: SafeArea(child: buildRegister(context))));
   }
 
   Widget buildRegister(context) {
@@ -186,7 +189,7 @@ class _RegisterState extends State<Register> {
               ],
             ),
           ),
-        Container(
+          Container(
             margin: EdgeInsets.only(top: 5),
             padding: EdgeInsets.symmetric(horizontal: 10),
             decoration: BoxDecoration(
@@ -197,7 +200,6 @@ class _RegisterState extends State<Register> {
               ),
             ),
             child: TextFormField(
-           
               controller: usernameController,
               keyboardType: TextInputType.number,
               validator: (value) {
@@ -246,7 +248,7 @@ class _RegisterState extends State<Register> {
               ),
             ),
             child: TextFormField(
-                 obscureText: true,
+              obscureText: true,
               controller: passwordController,
               keyboardType: TextInputType.number,
               validator: (value) {
